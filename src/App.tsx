@@ -1,5 +1,4 @@
 import { Toaster } from "@/components/ui/toaster";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -59,8 +58,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <GoogleOAuthProvider clientId="82808533077-ms8m672p8d0uoj2dsr1hr58jjar6425j.apps.googleusercontent.com">
-    <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LocalizationProvider>
           <TooltipProvider>
@@ -130,7 +128,6 @@ const App = () => (
         </LocalizationProvider>
       </ThemeProvider>
     </QueryClientProvider>
-  </GoogleOAuthProvider>
 );
 
 export default App;

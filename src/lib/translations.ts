@@ -26,6 +26,18 @@ export type TranslationKey =
   | 'products.quickView'
   | 'products.addToWishlist'
   | 'products.removeFromWishlist'
+  // Product Detail
+  | 'product.notFound'
+  | 'product.backToProducts'
+  | 'product.description'
+  | 'product.specifications'
+  | 'product.reviews'
+  | 'product.relatedProducts'
+  | 'product.quantity'
+  | 'product.addToCart'
+  | 'product.buyNow'
+  | 'product.share'
+  | 'product.addToWishlist'
   // Cart
   | 'cart.empty'
   | 'cart.checkout'
@@ -201,6 +213,18 @@ export const translations: Translations = {
     'products.quickView': 'Quick View',
     'products.addToWishlist': 'Add to Wishlist',
     'products.removeFromWishlist': 'Remove from Wishlist',
+    // Product Detail
+    'product.notFound': 'Product not found',
+    'product.backToProducts': 'Back to Products',
+    'product.description': 'Description',
+    'product.specifications': 'Specifications',
+    'product.reviews': 'Reviews',
+    'product.relatedProducts': 'Related Products',
+    'product.quantity': 'Quantity',
+    'product.addToCart': 'Add to Cart',
+    'product.buyNow': 'Buy Now',
+    'product.share': 'Share',
+    'product.addToWishlist': 'Add to Wishlist',
     // Cart
     'cart.empty': 'Your cart is empty',
     'cart.checkout': 'Checkout',
@@ -373,6 +397,18 @@ export const translations: Translations = {
     'products.quickView': 'Aperçu rapide',
     'products.addToWishlist': 'Ajouter aux favoris',
     'products.removeFromWishlist': 'Retirer des favoris',
+    // Product Detail
+    'product.notFound': 'Produit non trouvé',
+    'product.backToProducts': 'Retour aux produits',
+    'product.description': 'Description',
+    'product.specifications': 'Spécifications',
+    'product.reviews': 'Avis',
+    'product.relatedProducts': 'Produits similaires',
+    'product.quantity': 'Quantité',
+    'product.addToCart': 'Ajouter au panier',
+    'product.buyNow': 'Acheter maintenant',
+    'product.share': 'Partager',
+    'product.addToWishlist': 'Ajouter aux favoris',
     // Cart
     'cart.empty': 'Votre panier est vide',
     'cart.checkout': 'Paiement',
@@ -545,6 +581,18 @@ export const translations: Translations = {
     'products.quickView': 'Vista rápida',
     'products.addToWishlist': 'Añadir a favoritos',
     'products.removeFromWishlist': 'Quitar de favoritos',
+    // Product Detail
+    'product.notFound': 'Producto no encontrado',
+    'product.backToProducts': 'Volver a productos',
+    'product.description': 'Descripción',
+    'product.specifications': 'Especificaciones',
+    'product.reviews': 'Reseñas',
+    'product.relatedProducts': 'Productos relacionados',
+    'product.quantity': 'Cantidad',
+    'product.addToCart': 'Añadir al carrito',
+    'product.buyNow': 'Comprar ahora',
+    'product.share': 'Compartir',
+    'product.addToWishlist': 'Añadir a favoritos',
     // Cart
     'cart.empty': 'Tu carrito está vacío',
     'cart.checkout': 'Pagar',
@@ -717,6 +765,18 @@ export const translations: Translations = {
     'products.quickView': 'Schnellansicht',
     'products.addToWishlist': 'Zur Wunschliste',
     'products.removeFromWishlist': 'Von Wunschliste entfernen',
+    // Product Detail
+    'product.notFound': 'Produkt nicht gefunden',
+    'product.backToProducts': 'Zurück zu Produkten',
+    'product.description': 'Beschreibung',
+    'product.specifications': 'Spezifikationen',
+    'product.reviews': 'Bewertungen',
+    'product.relatedProducts': 'Ähnliche Produkte',
+    'product.quantity': 'Menge',
+    'product.addToCart': 'In den Warenkorb',
+    'product.buyNow': 'Jetzt kaufen',
+    'product.share': 'Teilen',
+    'product.addToWishlist': 'Zur Wunschliste',
     // Cart
     'cart.empty': 'Ihr Warenkorb ist leer',
     'cart.checkout': 'Zur Kasse',
@@ -889,6 +949,18 @@ export const translations: Translations = {
     'products.quickView': 'Visualização rápida',
     'products.addToWishlist': 'Adicionar aos favoritos',
     'products.removeFromWishlist': 'Remover dos favoritos',
+    // Product Detail
+    'product.notFound': 'Produto não encontrado',
+    'product.backToProducts': 'Voltar aos produtos',
+    'product.description': 'Descrição',
+    'product.specifications': 'Especificações',
+    'product.reviews': 'Avaliações',
+    'product.relatedProducts': 'Produtos relacionados',
+    'product.quantity': 'Quantidade',
+    'product.addToCart': 'Adicionar ao carrinho',
+    'product.buyNow': 'Comprar agora',
+    'product.share': 'Compartilhar',
+    'product.addToWishlist': 'Adicionar aos favoritos',
     // Cart
     'cart.empty': 'Seu carrinho está vazio',
     'cart.checkout': 'Finalizar',
@@ -1061,6 +1133,18 @@ export const translations: Translations = {
     'products.quickView': 'Snelle weergave',
     'products.addToWishlist': 'Aan verlanglijst toevoegen',
     'products.removeFromWishlist': 'Van verlanglijst verwijderen',
+    // Product Detail
+    'product.notFound': 'Product niet gevonden',
+    'product.backToProducts': 'Terug naar producten',
+    'product.description': 'Beschrijving',
+    'product.specifications': 'Specificaties',
+    'product.reviews': 'Beoordelingen',
+    'product.relatedProducts': 'Gerelateerde producten',
+    'product.quantity': 'Hoeveelheid',
+    'product.addToCart': 'In winkelwagen',
+    'product.buyNow': 'Nu kopen',
+    'product.share': 'Delen',
+    'product.addToWishlist': 'Aan verlanglijst toevoegen',
     // Cart
     'cart.empty': 'Uw winkelwagen is leeg',
     'cart.checkout': 'Afrekenen',
@@ -1233,6 +1317,18 @@ export const translations: Translations = {
     'products.quickView': 'عرض سريع',
     'products.addToWishlist': 'أضف إلى المفضلة',
     'products.removeFromWishlist': 'إزالة من المفضلة',
+    // Product Detail
+    'product.notFound': 'المنتج غير موجود',
+    'product.backToProducts': 'العودة إلى المنتجات',
+    'product.description': 'الوصف',
+    'product.specifications': 'المواصفات',
+    'product.reviews': 'التقييمات',
+    'product.relatedProducts': 'منتجات ذات صلة',
+    'product.quantity': 'الكمية',
+    'product.addToCart': 'أضف إلى السلة',
+    'product.buyNow': 'اشتري الآن',
+    'product.share': 'مشاركة',
+    'product.addToWishlist': 'أضف إلى المفضلة',
     // Cart
     'cart.empty': 'سلة التسوق فارغة',
     'cart.checkout': 'الدفع',
@@ -1405,6 +1501,18 @@ export const translations: Translations = {
     'products.quickView': '快速查看',
     'products.addToWishlist': '加入心愿单',
     'products.removeFromWishlist': '从心愿单移除',
+    // Product Detail
+    'product.notFound': '未找到产品',
+    'product.backToProducts': '返回产品',
+    'product.description': '描述',
+    'product.specifications': '规格',
+    'product.reviews': '评价',
+    'product.relatedProducts': '相关产品',
+    'product.quantity': '数量',
+    'product.addToCart': '加入购物车',
+    'product.buyNow': '立即购买',
+    'product.share': '分享',
+    'product.addToWishlist': '加入心愿单',
     // Cart
     'cart.empty': '购物车为空',
     'cart.checkout': '结账',

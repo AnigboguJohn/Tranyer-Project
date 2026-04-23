@@ -45,6 +45,10 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
+  user_metadata?: {
+    full_name?: string;
+    avatar_url?: string;
+  };
 }
 
 export interface Review {

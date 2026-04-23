@@ -15,7 +15,7 @@
  * @component
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SlidersHorizontal, Grid3X3, List } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
@@ -37,7 +37,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { products } from '@/data/mockData';
+import { allProducts } from '@/data/mockData';
+import { fetchProductsByLocation } from '@/lib/locationProductApi';
 import { useLocalization } from '@/contexts/LocalizationContext';
 
 const Products = () => {
@@ -54,6 +55,11 @@ const Products = () => {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState('featured');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [products, setProducts] = useState(allProducts);
+  const [productRegion, setProductRegion] = useState('global');
+  const [productsLoading, setProductsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(24);
 
   /**
    * Extract unique brands from products
@@ -61,7 +67,7 @@ const Products = () => {
    */
   const brands = useMemo(() => {
     return [...new Set(products.map((p) => p.brand))];
-  }, []);
+  }, [products]);
 
   /**
    * Filter and sort products based on current filter state
@@ -113,7 +119,21 @@ const Products = () => {
     }
 
     return result;
-  }, [searchQuery, priceRange, selectedBrands, selectedRating, sortBy]);
+  }, [searchQuery, priceRange, selectedBrands, selectedRating, sortBy, products]);
+
+  /**
+   * Paginated products for current page
+   */
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredProducts.slice(startIndex, endIndex);
+  }, [filteredProducts, currentPage, itemsPerPage]);
+
+  /**
+   * Total number of pages
+   */
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   /**
    * Toggle brand selection in filter
@@ -135,6 +155,29 @@ const Products = () => {
     setSelectedBrands([]);
     setSelectedRating(null);
   };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProducts = async () => {
+      const { products: regionalProducts, region } = await fetchProductsByLocation(allProducts);
+      if (!isMounted) return;
+      setProducts(regionalProducts);
+      setProductRegion(region);
+      setProductsLoading(false);
+    };
+
+    loadProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, priceRange, selectedBrands, selectedRating, sortBy]);
 
   /**
    * Filters Content Component
@@ -216,7 +259,10 @@ const Products = () => {
             {searchQuery ? `${t('common.search')}: "${searchQuery}"` : t('nav.products')}
           </h1>
           <p className="text-muted-foreground mt-1">
-            {filteredProducts.length} {t('nav.products').toLowerCase()}
+            {filteredProducts.length} {t('nav.products').toLowerCase()} found
+            {!productsLoading && (
+              <span className="ml-2 text-sm">(Regional feed: {productRegion.charAt(0).toUpperCase() + productRegion.slice(1)})</span>
+            )}
           </p>
         </div>
 
@@ -303,7 +349,7 @@ const Products = () => {
                     : 'space-y-4'
                 }
               >
-                {filteredProducts.map((product) => (
+                {paginatedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
@@ -316,6 +362,46 @@ const Products = () => {
                 <p className="text-sm text-muted-foreground mt-2">
                   Try adjusting your filters or search terms
                 </p>
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </Button>
+
+                {/* Page Numbers */}
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  const pageNum = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i;
+                  if (pageNum > totalPages) return null;
+
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={currentPage === pageNum ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setCurrentPage(pageNum)}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </Button>
               </div>
             )}
           </div>

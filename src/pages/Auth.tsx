@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import BrandLogo from '@/components/BrandLogo';
@@ -22,7 +20,7 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   
-  const { signIn, signUp, signInWithGoogle, resetPassword, updatePassword, user, pendingCartAction } = useAuth();
+  const { signIn, signUp, resetPassword, updatePassword, user, pendingCartAction } = useAuth();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -141,12 +139,6 @@ const Auth = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    // Deprecated: handleGoogleSignIn
-    setIsLoading(true);
-    // This function is now replaced by GoogleLogin below
-    setIsLoading(false);
-  };
 
   const renderModeContent = () => {
     switch (mode) {
@@ -219,36 +211,6 @@ const Auth = () => {
           </>
         );
       default:
-                    {/* Logout Button for Google JWT login */}
-                    <div className="mb-6">
-                      <Button
-                        variant="destructive"
-                        className="w-full h-12 font-medium"
-                        onClick={async () => {
-                          setIsLoading(true);
-                          try {
-                            const res = await fetch('http://localhost:5000/auth/google-jwt/logout', {
-                              method: 'POST',
-                              credentials: 'include',
-                            });
-                            const data = await res.json();
-                            if (res.ok) {
-                              toast.success('Logged out successfully');
-                              navigate('/auth');
-                            } else {
-                              toast.error(data.message || 'Logout failed');
-                            }
-                          } catch (err) {
-                            toast.error('Logout error');
-                          } finally {
-                            setIsLoading(false);
-                          }
-                        }}
-                        disabled={isLoading}
-                      >
-                        Log Out
-                      </Button>
-                    </div>
         return (
           <>
             <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">
@@ -260,61 +222,9 @@ const Auth = () => {
                 : 'Join Tranyer and start shopping'}
             </p>
 
-            {/* Google Login Button */}
-            <div className="space-y-3 mb-6">
-              <GoogleLogin
-                width="100%"
-                theme="outline"
-                size="large"
-                shape="rect"
-                text="continue_with"
-                onSuccess={async credentialResponse => {
-                  if (credentialResponse.credential) {
-                    setIsLoading(true);
-                    try {
-                      const res = await fetch('http://localhost:5000/auth/google-jwt', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify({ credential: credentialResponse.credential }),
-                      });
-                      const data = await res.json();
-                      if (res.ok) {
-                        toast.success('Google login successful!');
-                        setTimeout(() => navigate('/account'), 500);
-                      } else {
-                        toast.error(data.message || 'Google login failed');
-                      }
-                    } catch (err) {
-                      toast.error('Google login error');
-                    } finally {
-                      setIsLoading(false);
-                    }
-                  } else {
-                    toast.error('No credential received');
-                  }
-                }}
-                onError={() => {
-                  toast.error('Login Failed');
-                }}
-              />
-              <Button variant="outline" className="w-full h-12 font-medium" disabled>
-                <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                </svg>
-                Continue with Apple
-              </Button>
-              <Button variant="outline" className="w-full h-12 font-medium" disabled>
-                <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
-                  <path fill="#F25022" d="M1 1h10v10H1z"/>
-                  <path fill="#00A4EF" d="M1 13h10v10H1z"/>
-                  <path fill="#7FBA00" d="M13 1h10v10H13z"/>
-                  <path fill="#FFB900" d="M13 13h10v10H13z"/>
-                </svg>
-                Continue with Microsoft
-              </Button>
+            <div className="rounded-xl border border-border p-4 mb-6 bg-muted/50 text-sm text-muted-foreground">
+              Google authentication is unavailable in this frontend-only version.
+              Please use email and password to sign in or create a new account.
             </div>
 
             <div className="relative mb-6">

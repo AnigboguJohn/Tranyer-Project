@@ -16,8 +16,9 @@ import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
-import { products, formatPrice } from '@/data/mockData';
+import { products } from '@/data/mockData';
 import { useCart } from '@/contexts/CartContext';
+import { useLocalization } from '@/contexts/LocalizationContext';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -25,14 +26,15 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { formatPrice, t } = useLocalization();
 
   if (!product) {
     return (
       <Layout>
         <div className="container py-12 text-center">
-          <h1 className="text-2xl font-bold">Product not found</h1>
+          <h1 className="text-2xl font-bold">{t('product.notFound')}</h1>
           <Link to="/products" className="text-primary hover:underline mt-4 inline-block">
-            Back to Products
+            {t('product.backToProducts')}
           </Link>
         </div>
       </Layout>
