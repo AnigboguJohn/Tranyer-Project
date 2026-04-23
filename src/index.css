@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Jumia-inspired vibrant marketplace palette */
+    --background: 0 0% 97%;
+    --foreground: 220 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    /* Tranyer brand colors */
+    --primary: 149 35% 24%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 35% 92%;
+    --secondary-foreground: 145 50% 20%;
+
+    --muted: 145 15% 95%;
+    --muted-foreground: 145 40% 25%;
+
+    --accent: 52 94% 66%;
+    --accent-foreground: 145 35% 18%;
+
+    /* Success green for deals */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Destructive red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Custom marketplace variables */
+    --deal-badge: 0 84% 60%;
+    --rating-star: 45 100% 51%;
+    --price-current: 24 95% 45%;
+    --price-old: 220 10% 55%;
+    --header-bg: 149 35% 24%;
+    --header-foreground: 0 0% 100%;
+    --category-hover: 52 94% 66%;
+    --promo-gradient-start: 149 35% 24%;
+    --promo-gradient-end: 52 94% 66%;
+
+    --sidebar-background: 145 15% 95%;
+    --sidebar-foreground: 145 40% 25%;
+    --sidebar-primary: 149 35% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 145 35% 92%;
+    --sidebar-accent-foreground: 145 50% 20%;
+    --sidebar-border: 145 20% 85%;
+    --sidebar-ring: 149 35% 24%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 20% 13%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 20% 13%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 149 35% 28%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 35% 18%;
+    --secondary-foreground: 145 50% 90%;
+
+    --muted: 145 35% 10%;
+    --muted-foreground: 0 0% 85%;
+
+    --accent: 52 94% 66%;
+    --accent-foreground: 145 35% 18%;
+
+    --success: 142 76% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 24 95% 55%;
+
+    --header-bg: 149 35% 16%;
+    --header-foreground: 0 0% 100%;
+
+    --sidebar-background: 145 35% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 149 35% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 145 35% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 145 35% 12%;
+    --sidebar-ring: 149 35% 28%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .marketplace-header {
+    @apply bg-header text-header-foreground;
+  }
+
+  .deal-badge {
+    @apply bg-destructive text-destructive-foreground text-xs font-bold px-2 py-0.5 rounded;
+  }
+
+  .price-current {
+    @apply text-price-current font-bold;
+  }
+
+  .price-old {
+    @apply text-price-old line-through text-sm;
+  }
+
+  .rating-star {
+    @apply text-rating-star;
+  }
+
+  .promo-gradient {
+    background: linear-gradient(135deg, hsl(var(--promo-gradient-start)), hsl(var(--promo-gradient-end)));
+  }
+
+  .category-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .product-card {
+    @apply bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300;
+  }
+
+  .product-card:hover {
+    @apply -translate-y-1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.5s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
